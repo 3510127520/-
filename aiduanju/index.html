@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Portfolio | 新手AI短片作品展示</title>
+    <style>
+        /* 🎨 完美复刻 Billow：空气感粉白渐变与大块鲜明柔焦蓝云视觉系统 */
+        :root {
+            --bg-card: rgba(255, 255, 255, 0.88); /* 略带透明的白，让背后的蓝云隐约透过来 */
+            --accent: #2563EB;        
+            --accent-light: #EFF6FF;  
+            --text-main: #0F172A;     
+            --text-muted: #64748B;    
+            --border-soft: rgba(226, 232, 240, 0.8);   
+            --radius-large: 24px;     
+            --radius-small: 12px;
+            --shadow-billow: 0 40px 80px -20px rgba(15, 23, 42, 0.06); 
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: ui-rounded, 'SF Pro Rounded', system-ui, -apple-system, sans-serif;
+            letter-spacing: -0.02em;
+        }
+
+        body {
+            /* 🌌 背景：温柔而具有呼吸感的粉白有机大渐变 */
+            background: linear-gradient(135deg, #FFF1F2 0%, #FFFFFF 35%, #F5F3FF 70%, #F8FAFC 100%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            line-height: 1.65;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 32px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ----------------------------------
+           ✨ HERO SECTION (大留白首屏)
+        ---------------------------------- */
+        .hero {
+            padding: 160px 0 100px 0;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .eyebrow-tag {
+            background-color: var(--accent-light);
+            color: var(--accent);
+            padding: 8px 18px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 28px;
+            display: inline-block;
+            border: 1px solid rgba(37, 99, 237, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            line-height: 1.15;
+            font-weight: 800;
+            max-width: 850px;
+            margin-bottom: 24px;
+            color: var(--text-main);
+        }
+
+        .hero h1 span {
+            background: linear-gradient(120deg, #1D4ED8, #EC4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            max-width: 580px;
+            margin-bottom: 48px;
+        }
+
+        /* ----------------------------------
+           🎬 FEATURED VIDEO & CLOUD BACKGROUND
+        ---------------------------------- */
+        .showcase-container {
+            position: relative; 
+            margin-bottom: 140px;
+        }
+
+        .billow-cloud {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 140%;  
+            height: 160%;
+            z-index: 1;   
+            pointer-events: none; 
+            filter: blur(65px); 
+            opacity: 0.8;       
+            background: 
+                radial-gradient(circle at 25% 45%, #60A5FA 0%, transparent 55%),
+                radial-gradient(circle at 50% 30%, #38BDF8 0%, transparent 50%),
+                radial-gradient(circle at 75% 50%, #2563EB 0%, transparent 55%),
+                radial-gradient(circle at 45% 70%, #93C5FD 0%, transparent 60%),
+                radial-gradient(circle at 65% 65%, #C084FC 0%, transparent 45%); 
+        }
+
+        .showcase-wrapper {
+            position: relative;
+            z-index: 3; 
+            background: var(--bg-card);
+            backdrop-filter: blur(30px); 
+            border-radius: var(--radius-large);
+            padding: 32px;
+            box-shadow: var(--shadow-billow);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+        }
+
+        .video-box {
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 16 / 9;
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+        }
+
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 8px 8px 8px;
+            border-top: 1px solid var(--border-soft);
+            margin-top: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .video-meta { flex-direction: column; align-items: flex-start; gap: 16px; }
+        }
+
+        .meta-title h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 4px; }
+        .meta-title p { color: var(--text-muted); font-size: 0.95rem; }
+
+        .tech-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+        .badge {
+            background: var(--accent-light);
+            color: var(--accent);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* ----------------------------------
+           💡 WORKFLOW BLOCKS (工作流面板)
+        ---------------------------------- */
+        .section-intro {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .section-intro h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 12px; }
+        .section-intro p { color: var(--text-muted); font-size: 1.1rem; }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-bottom: 40px;
+        }
+        @media (max-width: 768px) { .highlights-grid { grid-template-columns: 1fr; } }
+
+        .hl-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-large);
+            padding: 40px;
+            box-shadow: var(--shadow-billow);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .hl-card h4 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 10px;}
+        .hl-card h4::before { content: "•"; color: var(--accent); font-size: 1.8rem; line-height: 0; }
+        
+        /* ✨ 交互式的触发文本样式 */
+        .clickable-text {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.65;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+        .clickable-text:hover {
+            color: var(--accent);
+        }
+        .clickable-text .more-hint {
+            display: inline-block;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-left: 4px;
+            font-weight: 600;
+        }
+
+        /* 专门用于提示词框内的代码样式 */
+        .clickable-code {
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: #1E293B;
+            word-break: break-word;
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+        .clickable-code span { color: var(--accent); font-weight: 600; }
+
+        .prompt-container {
+            background: var(--accent-light);
+            border-radius: var(--radius-small);
+            padding: 20px;
+            margin-top: 24px;
+            position: relative;
+            border: 1px solid rgba(37, 99, 237, 0.05);
+        }
+        .prompt-header {
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 0.75rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin-bottom: 12px;
+        }
+        .copy-btn {
+            background: #ffffff; border: 1px solid var(--border-soft); color: var(--text-main);
+            padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 0.75rem; font-weight: 600;
+            transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            z-index: 10;
+        }
+        .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+        /* 🎬 流式分镜与下方云朵定位 */
+        .storyboard-section {
+            position: relative;
+            padding-bottom: 140px;
+        }
+
+        .storyboard-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            position: relative;
+            z-index: 3;
+            margin-bottom: 40px;
+        }
+
+        .flow-row {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-large);
+            padding: 32px;
+            box-shadow: var(--shadow-billow);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            display: grid;
+            grid-template-columns: 80px 1.2fr 1fr 1.5fr;
+            gap: 24px;
+            align-items: center;
+            transition: transform 0.3s cubic-bezier(0.2, 1, 0.2, 1);
+        }
+        .flow-row:hover { transform: translateY(-2px); }
+
+        @media (max-width: 768px) {
+            .flow-row { grid-template-columns: 1fr; gap: 16px; padding: 24px; }
+        }
+
+        .flow-index { font-size: 1.5rem; font-weight: 800; color: rgba(37, 99, 237, 0.3); }
+        .flow-col strong { display: block; font-size: 1rem; margin-bottom: 6px; color: var(--text-main); }
+        .flow-col span { color: var(--text-muted); font-size: 0.95rem; }
+
+        .strategy-box {
+            background-color: #F8FAFC;
+            padding: 16px;
+            border-radius: var(--radius-small);
+            font-size: 0.92rem;
+            color: #334155;
+            border-left: 3px solid var(--accent);
+        }
+
+        .badge-risk {
+            background: #FEF2F2; color: #EF4444; padding: 2px 8px; border-radius: 4px;
+            font-size: 0.75rem; font-weight: 600; display: inline-block; margin-top: 8px;
+        }
+
+        /* 🌌 遮罩层/大容量弹窗组件 */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.3);
+            backdrop-filter: blur(8px);
+            z-index: 999;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        
+        .modal-card {
+            background: #ffffff;
+            width: 92%;
+            max-width: 580px;
+            max-height: 85vh;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 30px 60px -15px rgba(15, 23, 42, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow-y: auto;
+        }
+        .modal-overlay.active .modal-card { transform: scale(1); }
+        
+        .modal-card h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 20px; color: var(--text-main); }
+        .modal-card p { color: #334155; font-size: 1rem; line-height: 1.7; margin-bottom: 16px; }
+        .modal-card p strong { color: var(--text-main); }
+        
+        .modal-close-btn {
+            background: var(--accent-light); color: var(--accent); border: none;
+            padding: 10px 24px; border-radius: 12px; font-weight: 600; cursor: pointer;
+            float: right; transition: all 0.2s; margin-top: 20px; margin-bottom: 10px;
+        }
+        .modal-close-btn:hover { background: var(--accent); color: #ffffff; }
+
+        /* 🎬 专门针对剧本文本设计的视觉块 */
+        .script-block-warm {
+            background: #FFF1F2; border-left: 4px solid #EC4899;
+            padding: 20px; border-radius: 8px; margin-bottom: 24px;
+        }
+        .script-block-cold {
+            background: #F8FAFC; border-left: 4px solid #64748B;
+            padding: 20px; border-radius: 8px; margin-bottom: 24px;
+        }
+        .script-meta {
+            font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.05em; margin-bottom: 8px;
+        }
+        .meta-warm { color: #EC4899; }
+        .meta-cold { color: #475569; }
+
+        /* 📱 手机仿真通知样式 */
+        .phone-notice {
+            background: #1E293B; color: #F8FAFC; padding: 16px; border-radius: 12px;
+            margin-top: 16px; border: 1px solid rgba(255,255,255,0.08);
+        }
+        .notice-title { font-size: 0.8rem; font-weight: 700; color: #94A3B8; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;}
+        .notice-body { font-size: 0.9rem; color: #E2E8F0; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <section class="hero">
+        <div class="eyebrow-tag">✨ 2026 AI DIRECTION PORTFOLIO</div>
+        <h1>新手作品展示<br><span></span></h1>
+        <p>新手小白第一次通过学习相关aigc创作的作品</p>
+    </section>
+
+    <section class="showcase-container">
+        <div class="billow-cloud"></div>
+        
+        <div class="showcase-wrapper">
+            <div class="video-box">
+                <iframe src="https://player.bilibili.com/player.html?isOutside=true&bvid=BV1uBTw66ENx&cid=39538526523&p=1&autoplay=0" 
+                        scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"
+                        style="width: 100%; height: 100%; object-fit: cover; display: block; border: none;">
+                </iframe>
+            </div>
+            <div class="video-meta">
+                <div class="meta-title">
+                    <h3>小白第一次创 AI 微短篇《37.2°to0°》</h3>
+                    <p>独立完成从剧本细化、多模态分镜抽卡到中后期剪辑</p>
+                </div>
+                <div class="tech-badges">
+                    <span class="badge">Image2</span>
+                    <span class="badge">Midjourney V7</span>
+                    <span class="badge">runninghub</span>
+                    <span class="badge">seedance2.0</span>
+                    <span class="badge">可灵ai</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="storyboard-section">
+        <div class="billow-cloud" style="top: 60%; width: 120%; height: 120%; opacity: 0.65;"></div>
+
+        <div class="section-intro" style="position: relative; z-index: 3;">
+            <h2> AI 短剧工作流</h2>
+            <p>用结构化方案沉淀可复现的镜头资产</p>
+        </div>
+
+        <div class="highlights-grid" style="position: relative; z-index: 3;">
+            <div class="hl-card" style="background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(239,246,255,0.9) 100%);">
+                <div>
+                    <h4>剧本的来源与展示</h4>
+                    <div class="clickable-text" onclick="openModal('modal-script')" style="color: #334155;">
+                        刷着短视频来了个灵感，然后我就和ai聊，于是有了这个剧本。<span class="more-hint">[打开全案长文本剧本库 →]</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hl-card" style="background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(239,246,255,0.9) 100%);">
+                <div>
+                    <h4>剧本的分镜拆解</h4>
+                    <div class="clickable-text" onclick="openModal('modal-camera')" style="color: #334155;">
+                        将 故事剧本锁定为1分30秒，然后精准切割为 4 大结构单元、共 25 镜。通过长短镜 ASL（平均镜长 3.6s）的戏剧性跃变，完美呈现从“热恋碎片碎剪”到“分手POV长镜头”的视听美学。<span class="more-hint">[查看全案工业级分镜表 →]</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hl-card" style="margin-bottom: 32px; position: relative; z-index: 3;">
+            <div>
+                <h4>01 / 画面结构化提示词展示（全案核心画面资产）</h4>
+                <p style="margin-bottom: 16px;"><strong>我的万能画面公式：</strong> [主体详细描述] + [镜头语言/视角] + [光影氛围] + [动态指令] + [参数控制]</p>
+                
+                <div class="prompt-container" style="margin-top: 16px;">
+                    <div class="prompt-header">
+                        <span>核心资产 01 · 热恋高潮（镜子前 × 手机自拍）</span>
+                        <button class="copy-btn" onclick="copyAssetPrompt(event, 'prompt-asset-1')">一键复制</button>
+                    </div>
+                    <div class="clickable-code" id="prompt-asset-1"><span>A cinematic medium shot of a 25-year-old East Asian couple squeezing together in front of a large bathroom vanity mirror, full of love and pure happiness. The girl is holding a smartphone to take a selfie. Just before the shutter clicks, the boy suddenly leans in and gently kisses her cheek.</span>, The image captured in the mirror is slightly blurred from motion, showing authentic physical grain and an analog photo texture. Warm golden indoor lighting, high brightness, a bright camera lens flare bursts across the mirror surface during the flash moment, cozy and romantic moody lighting. Handheld micro camera shake, subtle reflection reflections. Unreal Engine 5 rendering style, photorealistic textures, 8K resolution, film quality --ar 16:9 --style raw --v 6.0</div>
+                </div>
+
+                <div class="prompt-container" style="margin-top: 16px;">
+                    <div class="prompt-header">
+                        <span>核心资产 02 · 毫无保留的冷酷切割（女主特写）</span>
+                        <button class="copy-btn" onclick="copyAssetPrompt(event, 'prompt-asset-2')">一键复制</button>
+                    </div>
+                    <div class="clickable-code" id="prompt-asset-2"><span>A movie close-up shot, male POV perspective. A 25-year-old East Asian girl standing under a solitary withered streetlamp on a deserted city sidewalk at midnight. She has a completely cold, calm, and emotionless expression, staring directly into the camera lens with absolute indifference.</span>, Wind blows her stray dark hair across her face, but she doesn't tuck it away. Thin fabric of her trench coat slightly rustling in the night breeze. Static handheld camera, deep shadow depth, focus entirely on her soulless eyes and lips. Harsh low-color-temperature sodium streetlight from directly overhead creates a stark contrast: one side of her face is lit by cold amber light, while the other side is completely swallowed by deep charcoal shadows. Gentle background swaying of thin branches, subtle airborne micro-particles. Cinematic dış mekan photography style reminiscent of "Day and Night", hyper-realistic skin grain, movie quality render, 8K --ar 16:9 --style raw --v 6.0</div>
+                </div>
+
+                <div class="prompt-container" style="margin-top: 16px;">
+                    <div class="prompt-header">
+                        <span>核心资产 03 · 第一人称视角无力感（男主手脚 × 粗糙地面）</span>
+                        <button class="copy-btn" onclick="copyAssetPrompt(event, 'prompt-asset-3')">一键复制</button>
+                    </div>
+                    <div class="clickable-code" id="prompt-asset-3"><span>A cinematic low-angle close-up shot from a first-person male POV looking downwards. In the lower part of the frame, the man's hands are visible, fingers stiffly extending to reach forward in desperation, then slowly and weakly clenching into tight fists, dropping down powerlessly.</span>, Below him, his own two feet stand on empty, empty asphalt street pavement filled with tiny cracks and a single withered leaf. Moving downward camera angle, dramatic perspective, shallow depth of field. Dim yellow glare from a distant streetlight casts two long, distorted, stretched shadows on the ground that fail to overlap. Cold and dark moody lighting, steel blue shadows blending with a harsh amber pool of light. Slow-motion movement of hands, wind blowing fine sand across the ground pavement. Physically accurate reflections and volumetric textures, Octane Render photorealistic quality, 8K resolution --ar 16:9 --style raw --v 6.0</div>
+                </div>
+
+                <div class="prompt-container" style="margin-top: 16px;">
+                    <div class="prompt-header">
+                        <span>核心资产 04 · 赛博反噬宿命一击（手机暗光 UI × 颤抖拇指）</span>
+                        <button class="copy-btn" onclick="copyAssetPrompt(event, 'prompt-asset-4')">一键复制</button>
+                    </div>
+                    <div class="clickable-code" id="prompt-asset-4"><span>A macro close-up top-down view of a smartphone screen glowing brightly in a pitch-black bedroom at night. On the screen, a high-brightness automated system UI notification pops up with text reading "One Year Ago Today", accompanied by a warm-toned, slightly blurry romantic photo of a smiling couple in front of a mirror.</span>, In the real world outside the screen, a man's trembling thumb is suspended right above the glowing glass screen, frozen in place, paralyzed by grief. Top-down macro static setup, extreme close-up on digital screen emissive pixels and skin texture of the thumb. The smartphone screen serves as the single light source in the entire dark space, illuminating the edge of the man's pale, bloodless face with a sharp cold white glare. Micro-shaking of the thumb, complete stillness of the digital UI. Unreal Engine 5 global illumination texture, photorealistic rendering, accurate glow bloom effect, 8K, cinematic --ar 16:9 --style raw --v 6.0</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hl-card" style="margin-bottom: 60px; position: relative; z-index: 3;">
+            <div>
+                <h4>02 / 视频结构化提示词展示（AI短剧控制流）</h4>
+                <p style="margin-bottom: 16px; margin-top: 4px;"><strong>AI短剧控制公式：</strong> [多模态资产/垫图锚点] + [生成前无视觉约束层] + [初始空间连续性坐标] + [影视级视觉风格与特效参数] + [镜头级别动捕/机位/音频联合控制块] + [底层绝对禁止项与代码控制]</p>
+                
+                <div class="prompt-container" style="background: #FFF1F2; border: 1px solid rgba(236, 72, 153, 0.1); margin-top: 16px;">
+                    <div class="prompt-header" style="color: #EC4899;">
+                        <span>Structured Video Prompt Flow (runinghub/image2生图/seedance2.0生成视频)</span>
+                        <button class="copy-btn" style="background: #ffffff; border-color: rgba(236, 72, 153, 0.2); color: #EC4899;" onclick="copyAssetPrompt(event, 'video-prompt-text')">一键复制全流</button>
+                    </div>
+                    <div class="clickable-code" id="video-prompt-text" style="color: #1E293B;">@图片1作为她
+@图片2作为他
+@图片3作为街道
+
+【创建声明】创建此短片 — 不包含任何移动箭头、路径线、镜头分割线
+
+【视觉风格】
+- 质感: 电影级 CG 当代都市情感，35mm 准广角，自然胶片颗粒，轻微柔光晕，轻微过曝
+- 色彩: Kodak 暖金橙 ↔ 北欧冷灰，高对比，黑位压暗，饱和度 +20%
+- 特效家族: 柔光扩散 + 手持呼吸晃动
+- 光线: 街灯钠灯暖黄 + 夜色冷蓝散射
+
+【生成前约束，不写入画面】以下内容只用于约束空间关系，不属于画面文字、字幕、UI、水印，不要渲染成可读文字。
+
+【空间连续性声明】本段为独立碎片，上段承接方向基准不延续；本段初始空间关系自建。
+
+【本段初始空间关系】
+- 角色与角色：她位于他的画面正前方约 1 米，倒着走面朝他；他面朝她，双手插口袋
+- 角色与场景：二人位于深夜街道，街灯在画面左上方，画面深处是街道远处
+- 角色与道具：无核心道具
+- 上段承接：无，独立碎片
+- 方向基准：镜头跟拍二人侧面，街道为画面深处
+
+【镜头列表】(共 5 个镜头，总时长 12 秒)
+
+中景 手持跟拍 — 深夜街道，两个人慢慢走着。她倒着走面朝他，鞋底在路面上轻轻的擦声。她开口，嘴唇微微张开：你说我们以后会不会变
+        音效: 脚步回声 + 环境底噪 + 清亮八音盒音色轻柔铺底 + 她的声音（轻而带着笑意）
+
+中景 手持跟拍 — 他没有犹豫，嘴唇动了一下：不会。她追问：你怎么知道。他：我就是知道。他的声音短而笃定，说完嘴角有一瞬上勾
+        音效: 他的声音（短、笃定、尾音微微上扬）+ 八音盒在他说"我就是知道"时一个单音轻弹
+
+近景 手持静止 — 她看着他的脸，停了两秒。她的眼睛眯成月牙形，嘴角慢慢弯上去，下巴微微抬起，鼻翼微张，眼睛里映着街灯的两个细小的暖黄光点——那是"好吧我信你"的笑
+        音效: 两秒的沉默只有八音盒两个轻声叮咚的音符 + 她极轻的一声鼻息（笑的气息）
+
+中景 手持静止 — 她笑着伸出手对着他，手指张开，手掌朝上，五根手指在街灯暖光下微微分开的影子落在他的胸口位置
+        音效: 衣料摩擦声（他肩膀微动准备抽手）+ 八音盒音阶上行
+
+近景 手持静止 — 他的手从口袋里抽出来——指节先露出袋口，然后整个手掌——他没有犹豫，两个人的手在画面中央握住。他的手比她的大一圈，握紧时指骨微凸，她的小指勾住他无名指的根部
+        音效: 衣料摩擦声（他抽手出口袋）+ 皮肤轻触微响 + 八音盒一个长亮的单音持续渐柔
+
+【风格】电影级别的 CG 当代都市情感 影片
+
+禁止项: 文字/UI/水印/Logo/角标/可读文字/真实UI
+
+【强制声明】
+无背景音乐，仅保留环境音与人声；画面禁字幕/文字/水印/Logo；禁止可读文字；禁止超现实夸张；禁止无反作用力动作</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-intro" style="margin-top: 80px; margin-bottom: 40px; position: relative; z-index: 3;">
+            <h3 style="font-size: 1.6rem; font-weight: 800;">03 / 自我介绍</h3>
+        </div>
+
+        <div class="storyboard-flow">
+            <div class="flow-row">
+                <div class="flow-index">#01</div>
+                <div class="flow-col">
+                    <strong>本科大二学生</strong>
+                    <span>对ai短剧有着一定的兴趣，喜欢了解动漫，会用ai之类的工具，希望能够进到贵公司进行学习。</span>
+                </div>
+                <div class="flow-col">
+                    <strong>个人能力</strong>
+                    <span>1.熟练使用sd/mj/即梦，可灵/等工具。2.懂分镜，审美在线，能熟练运用ai写prompt，解决ai生成问题。3.责任感强，能高效交付作品</span>
+                            </div>
+
+                </section>
+
+</div>
+
+<div class="modal-overlay" id="modal-camera" onclick="closeModal('modal-camera')">
+    <div class="modal-card" onclick="event.stopPropagation()" style="max-width: 900px; width: 95%;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+            <div>
+                <h3 style="margin-bottom: 4px;">工业级短剧视听工程：全片 25 镜精确分镜拆解表</h3>
+                <span style="font-size:0.8rem; color:var(--text-muted); font-weight:600;">总时长：1'30" (90s) | 平均镜长 (ASL)：3.6s | 镜头资产流：CineForge Matrix</span>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 24px; background: #F8FAFC; padding: 20px; border-radius: 12px; border: 1px solid var(--border-soft);">
+            <h4 style="font-size: 1rem; margin-bottom: 12px; color: var(--text-main); display:flex; align-items:center; gap:6px;">📈 Part 2 · 单元结构拆解表</h4>
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid #CBD5E1; color: var(--text-main); font-weight: 700;">
+                            <th style="padding: 8px;">#</th>
+                            <th style="padding: 8px;">单元名称</th>
+                            <th style="padding: 8px;">时长</th>
+                            <th style="padding: 8px;">节奏</th>
+                            <th style="padding: 8px;">戏剧任务</th>
+                            <th style="padding: 8px;">视觉 Motif</th>
+                            <th style="padding: 8px;">承接钩子</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid #E2E8F0; background: rgba(255, 241, 242, 0.4);">
+                            <td style="padding: 8px; font-weight:700;">1</td>
+                            <td style="padding: 8px; font-weight:700; color:#EC4899;">热恋碎片</td>
+                            <td style="padding: 8px;">20"</td>
+                            <td style="padding: 8px;">中/轻 → 中</td>
+                            <td style="padding: 8px;">20秒内甜蜜密度堆到最高，最后一帧定格闭眼笑</td>
+                            <td style="padding: 8px;">暖金过曝 / 手持呼吸感 / 拍糊的合照</td>
+                            <td style="padding: 8px; color:#EC4899; font-weight:600;">吉他声在最高点被暴力切断</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #E2E8F0; background: #FFFBF0;">
+                            <td style="padding: 8px; font-weight:700;">2</td>
+                            <td style="padding: 8px; font-weight:700; color:#D97706;">硬切点</td>
+                            <td style="padding: 8px;">0"</td>
+                            <td style="padding: 8px;">— / —</td>
+                            <td style="padding: 8px;">暴力切换：同一张脸下从柔情到决绝的瞬间异变</td>
+                            <td style="padding: 8px;">暖调 → 冷调 / 乐声 → 死寂</td>
+                            <td style="padding: 8px;">吉他声消失后的无声风声入画</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #E2E8F0; background: rgba(248, 250, 252, 0.6);">
+                            <td style="padding: 8px; font-weight:700;">3</td>
+                            <td style="padding: 8px; font-weight:700; color:#475569;">分手·POV</td>
+                            <td style="padding: 8px;">50"</td>
+                            <td style="padding: 8px;">松 / 极重</td>
+                            <td style="padding: 8px;">男主视角沉浸式经受整场冷酷决绝的分手凌迟</td>
+                            <td style="padding: 8px;">钠灯半明半暗 / 固定POV / 画面边缘颤抖的手</td>
+                            <td style="padding: 8px;">背影消融 → 2秒黑暗风声渐零</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #CBD5E1; background: rgba(239, 246, 255, 0.4);">
+                            <td style="padding: 8px; font-weight:700;">4</td>
+                            <td style="padding: 8px; font-weight:700; color:#2563EB;">回忆反噬</td>
+                            <td style="padding: 8px;">20"</td>
+                            <td style="padding: 8px;">紧 / 重</td>
+                            <td style="padding: 8px;">一年前合照推送，手机冷暖光色温呼应，宿命一击</td>
+                            <td style="padding: 8px;">手机屏幕微光为唯一光源 / 拇指悬停 / 终黑</td>
+                            <td style="padding: 8px; font-weight:600;">全黑 7 秒死寂，彻底谢幕</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 8px; text-align: right; font-weight:600;">
+                ⏳ 时长严格精算累计：20" + 0" + 50" + 2" (黑屏) + 13" + 7" (终黑) = 90秒 (1分30秒) 
+            </div>
+        </div>
+
+        <h4 style="font-size: 1rem; margin-bottom: 12px; color: var(--text-main); display:flex; align-items:center; gap:6px;">🎬 一般短剧25镜全流程分镜表</h4>
+        
+        <style>
+            .lens-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; text-align: left; }
+            .lens-table th { background: #0F172A; color: #ffffff; padding: 10px 8px; font-weight: 600; }
+            .lens-table td { padding: 10px 8px; border-bottom: 1px solid #E2E8F0; vertical-align: top; line-height: 1.5; }
+            .section-row { background: #F1F5F9; font-weight: 700; color: #1E293B; font-size: 0.85rem; }
+            .lens-no { font-weight: 700; color: var(--accent); }
+        </style>
+
+        <div style="overflow-y: auto; max-height: 450px; border: 1px solid var(--border-soft); border-radius: 12px;">
+            <table class="lens-table">
+                <thead>
+                    <tr>
+                        <th style="width: 50px;">镜号</th>
+                        <th style="width: 70px;">时间轴</th>
+                        <th style="width: 50px;">时长</th>
+                        <th style="width: 60px;">景别</th>
+                        <th style="width: 110px;">机位·运动</th>
+                        <th>画面内容控制（提示词资产流）</th>
+                        <th style="width: 180px;">声音工程 / 音效设计</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="section-row"><td colspan="7" style="padding: 8px 12px; background:#FFF1F2; color:#EC4899;">🎬 单元 1 · 热恋碎片（0:00 - 0:20） —— 暖调手持呼吸感，视觉高频碎剪</td></tr>
+                    <tr>
+                        <td class="lens-no">01</td><td>0:00</td><td>3"</td><td>MS</td><td>手持·跟拍</td>
+                        <td>冰淇淋店门口。她舀一勺递到他嘴边，他张嘴接住。她手指沾了一点，抹在他鼻尖上。</td>
+                        <td>轻快吉他乐起，柔和的街头底噪微入。</td>
+                    </tr>
+                    <tr>
+                        <td class="lens-no">02</td><td>0:03</td><td>2"</td><td>MCU</td><td>手持·静止</td>
+                        <td>她手指离开他鼻尖。他愣了一秒。两个人同时笑出来。</td>
+                        <td>吉他乐持续，她清脆的笑声轻入。</td>
+                    </tr>
+                    <tr>
+                        <td class="lens-no">03</td><td>0:05</td><td>3"</td><td>MS</td><td>手持·跟拍</td>
+                        <td>雨天。半透明雨伞下两个人往前走。伞面向她极度倾斜——他半边肩膀全湿。</td>
+                        <td>温和的雨声淡淡叠加在吉他上。</td>
+                    </tr>
+                    <tr>
+                        <td class="lens-no">04</td><td>0:08</td><td>2"</td><td>CU</td><td>手持·静止</td>
+                        <td>她的侧脸，完全没发现伞偏了。嘴角带着藏不住的甜笑。</td>
+                        <td>雨声微微上升，吉他旋律平稳持续。</td>
+                    </tr>
+                    <tr>
+                        <td class="lens-no">05</td><td>0:10</td><td>2"</td><td>MS</td><td>手持·静止</td>
+                        <td>浴室洗手台大镜子前。她举着手机，两个人在镜子里挤满了整个画面。他突然凑过来亲了她脸颊。</td>
+                        <td>她的笑声，手机快门按下的声音紧接着响起。</td>
+                    </tr>
+                    <tr>
+                        <td class="lens-no">06</td><td>0:12</td><td>3"</td><td>MCU</td><td>手持·静止</td>
+                        <td>快门闪光瞬间，镜子中的两个人糊成一团，但都笑得灿烂。快门声时画面定格一秒。</td>
+                        <td>快门声带有轻微余响，吉他旋律平滑接上。</td>
+                    </tr>
+                    <tr>
+                        <td class="lens-no">07</td><td>0:15</td><td>2"</td><td>MS</td><td>手持·跟拍</td>
+                        <td>深夜暖光街道。并排着散步，她微笑面朝他，轻快地诉说：你说我们以后会不会变。他双手插在口袋里，笃定的回答：不会</td>
+                        <td>清晰的脚步回声，夜间环境底噪，吉他声转为温柔。</td>
+                    </tr>
+                    <tr>
+                        <td class="lens-no">08</td><td>0:17</td><td>1.5"</td><td>CU</td><td>手持·静止</td>
+                        <td>她笑着问：你怎么知道。他说：我就知道，她顺势停下脚步。他微微低头，脸上温柔的对着他微笑。她的睫毛幸福地颤动了一下。。</td>
+                        <td>画面收录微弱的呼吸声，吉他乐从高音展开上行。。</td>
+                    </tr>
+                    <tr>
+                        <td class="lens-no">09</td><td>0:21</td><td>1.5"</td><td>MCU</td><td>低角度·静止</td>
+                        <td>她伸出手对着他，手指温柔地张开。画面下缘他将手从口袋抽出来，准备迎上去</td>
+                        <td>细微的衣料摩擦声，吉他一音轻弹。</td>
+                   
+                    <tr class="section-row"><td colspan="7" style="padding: 8px 12px; background:#FFFBF0; color:#D97706;">🎬 单元 2 · 暴力硬切点（无独立镜头，纯视听绝缘切换面）</td></tr>
+                    <tr style="background:#FFFDFA;">
+                        <td colspan="7" style="padding:12px; font-size:0.8rem; color:#64748B;">
+                            <strong>【视听极端对撞控制】</strong>镜 10 最后一帧与镜 11 第一帧之间绝无过渡硬切。<br>
+                            <strong>上一帧：</strong>她闭眼笑了，暖金调过曝，伴随最高亢的吉他声。 <br>
+                            <strong>下一帧：</strong>她的脸仍在画面中央，但画风瞬间沦为极冷钠灯调，音乐在第一帧被<strong>暴力掐断消失</strong>，唯有一阵冷酷的孤寂风声粗暴入画。
+                        </td>
+                    </tr>
+
+                    <tr class="section-row"><td colspan="7" style="padding: 8px 12px; background:#F8FAFC; color:#475569;">🎬 单元 3 · 分手·POV沉浸凌迟（0:20 - 1:10） —— 全程男主 POV 第一人称视角控制流</td></tr>
+                    <tr>
+                        <td class="lens-no">11</td><td>0:20</td><td>5"</td><td>LS→MCU</td><td>POV·步行入画</td>
+                        <td>远处昏暗的路灯在男主视野里晕成一个个模糊的光圈。男主的视角沉重往前走了几步，她的身影在路灯下冰冷站定。风把路边的垃圾塑料袋刮起。</td>
+                        <td>男主脚步声沙沙停下，低频的荒凉风声瞬间填补整个音场。</td>
+                    </tr>
+                    <tr>
+                        <td class="lens-no">12</td><td>0:25</td><td>3"</td><td>MCU</td><td>POV·静止</td>
+                        <td>她在枯黄的路灯下，冰冷正对镜头。半张脸被冷光照亮，半张脸隐没在绝对黑暗中。风吹散发到脸上，她面无表情，没有撩开。</td>
+                        <td>中低频的怒吼风声，远处的城市深夜车碾路面声微弱入画。</td>
+                    </tr>
+                    <tr>
+                        <td class="lens-no">13</td><td>0:28</td><td>3"</td><td>CU</td><td>POV·静止</td>
+                        <td>她神色漠然，薄唇轻启：<strong>“我们分手吧。”</strong> 她双手冷淡地握着自己的另一只手腕，没有任何挽留或多余的动作。</td>
+                        <td>她的台词极为清晰，不带任何哭腔或情绪起伏。风声在此刻突然暂弱。</td>
+                    </tr>
+                    <tr>
+                        <td class="lens-no">14</td><td>0:31</td><td>3"</td><td>MCU</td><td>POV·微晃</td>
+                        <td>她神态平静：“我想了很久。不是你的问题。” 她偏头微微移开视线一瞬，又迅速毫无波澜地看回来。镜头发生一下轻微颤动。</td>
+                        <td>镜头晃动同步叠入男主的一声由于绝望导致猛烈抖动的微弱呼吸声。风声再起。</td>
+                    </tr>
+                    <tr>
+                        <td class="lens-no">15</td><td>0:34</td><td>3"</td><td>MCU</td><td>POV·静止</td>
+                        <td>她注视着他：“就是我们不太合适。” 画面下缘短暂出现了男主颤抖的手——手指僵硬地张开，似乎想去抓她，但最终攥紧成拳，绝望无力地垂了下去。</td>
+                        <td>男主喉咙深处挤压出极度压抑的沉重呼吸声，伴随双手垂下时衣料细微的死寂擦音。</td>
+                    </tr>
+                    <tr>
+                        <td class="lens-no">16</td><td>0:37</td><td>3"</td><td>MCU</td><td>POV·静止</td>
+                        <td>男主沙哑干涩的声音颤抖传来（画外音 OS）：<strong>“我能——”</strong>。台词未完，她便轻轻地摇了摇头。不是生气的抗拒，仅仅是冰冷拒绝的告知。</td>
+                        <td>男主的声音沙哑如挤出来一般。她摇头时，风衣领子发出冷漠的细微摩擦响动。</td>
+                    </tr>
+                    <tr>
+                        <td class="lens-no">17</td><td>0:40</td><td>5"</td><td>CU</td><td>POV·静止</td>
+                        <td>她一字一句斩断执念：“跟你好不好没关系。真的。” （冷酷地停顿足足两秒） “就是我……不想继续了。”</td>
+                        <td>在你吐出“不想继续了”的瞬间，背景风声音量<strong>骤然暴增</strong>，随后视听陷入死一般的沉默。</td>
+                    </tr>
+                    <tr>
+                        <td class="lens-no">18</td><td>0:45</td><td>5"</td><td>手/脚</td><td>POV·下移</td>
+                        <td>镜头痛苦下移——男主彻底绝望低头。观众视线中出现自己的双脚 and 地面上被钠灯拉扯得一长一短、无法重合的两个影子。影子边缘被风沙吹拂。低头持续 3 秒才沉重抬起。</td>
+                        <td>全段绝对死寂无乐。只有凄厉的风声，伴随男主极为粗重、缓慢且心碎的沉闷喘息声。</td>
+                    </tr>
+                    <tr>
+                        <td class="lens-no">19</td><td>0:50</td><td>5"</td><td>CU</td><td>POV·静止</td>
+                        <td>画面重新抬起对准她的脸。她站在原地静静地等他接受这个事实——不生气，不难过，毫无不舍。散发被大风吹得极乱。她说：“前几天我在想一个事。那时候我们散步，我倒着走，你牵我手。”</td>
+                        <td>她的声线没有任何颤音，平淡至极。风声在此时被刻意压低，几乎只剩下她毫无温度的客观叙述。</td>
+                    </tr>
+                    <tr>
+                        <td class="lens-no">20</td><td>0:55</td><td>3"</td><td>ECU</td><td>POV·静止</td>
+                        <td>极致特写她的眼睛。瞳孔没有一丝动摇或躲闪。她吐出最后致命一刀：<strong>“现在想想挺没意思的。”</strong> 绝情定格一秒。随后她毫无留恋地转身。</td>
+                        <td>在她话音落下的瞬间，后背充满画面，风声突然疯狂拉回到中频，将余温撕碎。</td>
+                    </tr>
+                    <tr>
+                        <td class="lens-no">21</td><td>0:58</td><td>10"</td><td>MLS→ELS</td><td>POV·静止</td>
+                        <td>她的背影占据了大半个画面。不紧不慢、一步一步、异常决绝地走出路灯残存的光圈，身体最终化为一道黑色轮廓，在 1:05 <strong>完全消融在远处的无底漆黑中</strong>。镜头留在空无一人的马路原地，再也没有追赶。</td>
+                        <td>她决绝的脚步声在长镜头中渐行渐远渐弱。冷风呼啸，1:08 远处一辆深夜货车冷漠经过，远光灯利刃般扫过路面后又复归黑暗。从 1:08 起画面彻底沦为绝对全黑，车声远去，仅余冷风尾音。</td>
+                    </tr>
+                    <tr style="background:#0F172A; color:#ffffff;"><td class="lens-no" style="color:#94A3B8;">黑屏</td><td>1:08</td><td>2"</td><td>——</td><td>绝对黑屏</td>
+                    <td colspan="2" style="padding:10px; text-align:center; color:#94A3B8;">【时间留白】绝对全黑视听盲区。风声在 1:09 精准降为零，进入没有声音、没有画面的两秒终极死寂，为下一单元的暴击蓄力。</td></tr>
+
+                    <tr class="section-row"><td colspan="7" style="padding: 8px 12px; background:#EFF6FF; color:#2563EB;">🎬 单元 4 · 回忆反噬（1:10 - 1:30） —— 赛博反噬，宿命宿醉终黑</td></tr>
+                    <tr>
+                        <td class="lens-no">22</td><td>1:10</td><td>6"</td><td>MCS</td><td>低角度·静止</td>
+                        <td>一束冰冷的智能手机屏幕强光角然亮起！男主在昏暗冰冷的房间床上侧躺，毫无血色的半张脸被手机白光照亮。屏幕上高亮弹出一则系统智能推送 UI：「一年前的今天」——下方附带着一年前浴室洗手台镜子前，那张虽然拍糊了、却笑得毫无保留的双人温馨合照。</td>
+                        <td>风声彻底归零。在手机亮屏的第一帧，叠入一声极为沉闷、冰冷刺骨的手机系统短促震动音（通知声）。随后男主因悲伤而微弱呼吸声切入。</td>
+                    </tr>
+                    <tr>
+                        <td class="lens-no">23</td><td>1:16</td><td>4"</td><td>CU</td><td>俯拍·静止</td>
+                        <td>镜头完全推到手机屏幕大特写上。系统照片里，她幸福伸出手指按快门的瞬间定格在发光的玻璃屏幕上。画面里男主那只颤抖的拇指悬停在屏幕正上方，没有划掉通知，也永远没有勇气去点开，就像冰封了一般一动不动。</td>
+                        <td>收录男主极其缓慢、克制却由于极度痛苦而颤抖的微弱气流呼吸音。系统 UI 陷入无声。</td>
+                    </tr>
+                    <tr>
+                        <td class="lens-no">24</td><td>1:20</td><td>3"</td><td>——</td><td>静止</td>
+                        <td><strong>【手机锁屏】</strong>没有任何外界操作，手机由于长时间无响应，屏幕在一秒内“啪”地自动熄灭，无情复归冰冷的绝对全黑。</td>
+                        <td>画面陷入绝对全黑的瞬间，叠入男主在极度黑暗里的一声彻底崩溃的心碎长叹。</td>
+                    </tr>
+                    <tr style="background:#000000; color:#64748B;">
+                        <td class="lens-no" style="color:#475569;">25</td><td>1:23</td><td>7"</td><td>——</td><td>终黑死寂</td>
+                        <td colspan="2" style="padding:16px; text-align:center; color:#475569;">
+                            <strong>【绝对片尾终黑·余韵沉淀】</strong>全黑大留白长达 7 秒。在第 1:24 秒处收录全片最后一声、极其轻微且悠长的沉痛呼吸尾音。随后在 1:25 至 1:30 陷入没有任何光亮、没有任何声响的绝对维度死寂。全片彻底谢幕结束。
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <button class="modal-close-btn" onclick="closeModal('modal-camera')">关闭全案表</button>
+    </div>
+</div>
+
+<div class="modal-overlay" id="modal-script" onclick="closeModal('modal-script')">
+    <div class="modal-card" onclick="event.stopPropagation()">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+            <div>
+                <h3 style="margin-bottom: 4px;">短剧视听文学全案：《从极致甜蜜到冷酷切割》</h3>
+                <span style="font-size:0.8rem; color:var(--text-muted); font-weight:600;">时幅：Ultrashort 1-3分钟 | 导出：2026-07-01 | 创剧：CineForge</span>
+            </div>
+        </div>
+
+        <p style="font-size: 0.95rem; color: var(--text-muted); background: #F1F5F9; padding: 12px; border-radius: 8px;">
+            <strong>底层设计核心</strong>：时间并置式（前半段纯甜蜜/后半段纯决绝，硬切无预警）。通过消除一切不舍与心软的微表情，突出女性冷酷、果断的人物前史与精神切割。
+        </p>
+
+        <div class="script-block-warm">
+            <div class="script-meta meta-warm">🎬 PHASE 1 · 极致热恋碎片（约20秒 / 暖调手持呼吸感）</div>
+            <p style="font-size:0.92rem; margin-bottom:10px;"><strong>[场景1·冰淇淋店]</strong> 画面暖调，轻微过曝。轻快吉他背景乐。她舀一勺递到他嘴边，他张嘴接住。她手指沾了一点，抹在他鼻尖上。He froze for a second, then both burst out laughing.</p>
+            <p style="font-size:0.92rem; margin-bottom:10px;"><strong>[场景2·雨中倾斜的伞]</strong> 下雨天。半透明伞下两个人往前走。伞面向她倾斜——他半边肩膀全湿。她的侧脸，完全没发现伞偏了，嘴角在笑。雨声淡淡叠加在吉他上。</p>
+            <p style="font-size:0.92rem; margin-bottom:10px;"><strong>[场景3·洗手台大镜子]</strong> 她举着手机，两个人在镜子里挤满了整个画面。按快门之前，他突然凑过来亲了她脸颊。她笑出声，手抖了，拍糊了。快门声响起，照片里镜中的人糊成一团，但都在幸福地笑。</p>
+            <p style="font-size:0.92rem;"><strong>[场景4·深夜街头散步]</strong> 暖光深夜街道，两个人慢慢走着。她倒着走，面朝他，笑着说什么。他双手插在口袋里。<br>
+               <strong>她</strong>：“你说我们以后会不会变。”<br>
+               <strong>他</strong>（没犹豫）：“不会。”<br>
+               <strong>她</strong>：“你怎么知道。”<br>
+               <strong>他</strong>：“我就是知道。”<br>
+               她伸出手对着他，手指张开。他没有犹豫，把手从口袋里抽出来，握住她。他低头，嘴唇碰在她额头上。她的睫毛动了一下。眼睑合上——笑了。吉他声冲向最高点，戛然而止。</p>
+        </div>
+
+        <div style="text-align: center; font-weight: 800; color: #EF4444; font-size: 0.85rem; margin: 20px 0; letter-spacing: 0.2em; border-top: 1px dashed var(--border-soft); padding-top: 15px;">
+            【 AUDIO CUT / 音乐骤停 · 画面硬切至极冷色调 】
+        </div>
+
+        <div class="script-block-cold">
+            <div class="script-meta meta-cold">🎬 PHASE 2 · 街边路灯下（约1分钟 / 毫无保留的冷酷切割）</div>
+            <p style="font-size:0.92rem; margin-bottom:12px;">枯黄路灯在远处晕成光圈。他低沉往前的脚步声停下。你在路灯下，正对着镜头，半张脸亮着，半张脸在暗处.风刮过路边，把碎发吹在脸上。她没撩，眼神死寂。<br>
+               <strong>她</strong>：“我们分手吧。我想了很久。不是你的问题。就是我们不太合适。”</p>
+            <p style="font-size:0.92rem; margin-bottom:12px;">镜头微晃，他的呼吸抖了一下。画面下缘出现他的手——短暂地张开想抓她，又慢慢紧紧握成拳，无力垂下去。观众听到他喉咙里挤出来的沉重几个字。<br>
+               <strong>男主（OS）</strong>：“我能——”<br>
+               <strong>她</strong>（轻轻摇头，衣服微响，不带情绪）：“跟你好不好没关系。真的。就是我……不想继续了。”</p>
+            <p style="font-size:0.92rem;">背景风声骤然暴增。男主低下头，镜头看得到自己的脚和地上拉扯的两个影子。影子边缘被风沙吹拂。他抬起头，她还在冷静地等。风把她头发吹乱，她声音极平：<br>
+               <strong>她</strong>：“前几天我在想一个事。那时候我们散步，我倒着走，你牵我手。现在想想挺没意思的。”<br>
+               她盯着他的眼睛，没有一点闪躲。说完，停顿了一秒。随后她毫无留恋地转身走了。她的后背占了大半个画面，一步步走出路灯的光圈。身体变成一个暗色的轮廓，在 1 分 05 秒完全融进无底的黑里。画面留在原地空无一人的马路——空的路，凄厉风声，深夜货车扫过一道远光灯，又熄灭。一切彻底沦为黑暗，只剩冷风尾音。</p>
+        </div>
+
+        <div class="script-meta" style="color:var(--text-main)">🎬 PHASE 3 · 回艺反噬（赛博反噬 / 暴击终黑）</div>
+        <p style="font-size:0.92rem;">黑屏死寂两秒后，床头上手机屏幕的光骤然亮起！低角度固定机位：男主在床上侧躺，半张脸被屏幕狠狠照亮。手机伴随一下极闷的系统短促震动。屏幕上是系统弹出的自动化推送：</p>
+        
+        <div class="phone-notice">
+            <div class="notice-title">💡 照片小组件 · 提示</div>
+            <div class="notice-body">
+                <strong>「一年前的今天」</strong><br>
+                一张照片：洗手台镜子前，两个挤在一起的人。虽然拍糊了，但两个人都发自内心地笑着。
+            </div>
+        </div>
+        <p style="font-size:0.92rem; margin-top:12px; color:var(--text-muted); ">手机大特写。照片里她手指正悬在快门瞬间。而现实中男主的拇指悬在屏幕上方，就像冰封原点一动不动。由于太长没有响应，屏幕一秒内自动熄灭。复归黑暗，男主发出心碎的长叹。最后 7 秒绝对长片尾终黑。并在第 1 分 24 秒收录最后一声长叹尾音，彻底进入无声全黑。谢幕。</p>
+
+        <button class="modal-close-btn" onclick="closeModal('modal-script')">关闭全案</button>
+    </div>
+</div>
+
+<script>
+    function copyAssetPrompt(event, elementId) {
+        event.stopPropagation();
+        const textToCopy = document.getElementById(elementId).innerText.trim();
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            const btn = event.target;
+            const originalText = btn.innerText;
+            btn.innerText = '已复制！'; 
+            btn.style.color = 'var(--accent)'; 
+            btn.style.borderColor = 'var(--accent)';
+            setTimeout(() => {
+                btn.innerText = originalText; 
+                btn.style.color = ''; 
+                btn.style.borderColor = '';
+            }, 2000);
+        }).catch(err => { console.error('复制失败: ', err); });
+    }
+
+    function openModal(modalId) { document.getElementById(modalId).classList.add('active'); }
+    function closeModal(modalId) { document.getElementById(modalId).classList.remove('active'); }
+</script>
+
+</body>
+</html>
